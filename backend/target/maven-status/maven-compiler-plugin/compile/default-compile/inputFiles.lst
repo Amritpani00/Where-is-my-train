@@ -25,4 +25,5 @@
 /workspace/backend/src/main/java/com/traintracker/api/service/PdfTicketService.java
 /workspace/backend/src/main/java/com/traintracker/api/web/EmailController.java
 /workspace/backend/src/main/java/com/traintracker/api/web/PaymentController.java
+/workspace/backend/src/main/java/com/traintracker/api/web/PaymentWebhookController.java
 /workspace/backend/src/main/java/com/traintracker/api/web/PingController.java

@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
-import java.util.Base64;
 import java.util.Optional;
 
 @Service
@@ -25,6 +24,9 @@ public class PaymentService {
 
 	@Value("${razorpay.keySecret:}")
 	private String keySecret;
+
+	@Value("${razorpay.webhookSecret:}")
+	private String webhookSecret;
 
 	public PaymentService(RazorpayClient razorpayClient, BookingRepository bookingRepository, PaymentRepository paymentRepository) {
 		this.razorpayClient = razorpayClient;
@@ -69,6 +71,12 @@ public class PaymentService {
 			paymentRepository.save(p);
 		});
 		return true;
+	}
+
+	public boolean verifyWebhook(String body, String signature) {
+		if (webhookSecret == null || webhookSecret.isBlank()) return false;
+		String computed = hmacSha256Hex(body, webhookSecret);
+		return computed.equals(signature);
 	}
 
 	private static String hmacSha256Hex(String data, String secret) {

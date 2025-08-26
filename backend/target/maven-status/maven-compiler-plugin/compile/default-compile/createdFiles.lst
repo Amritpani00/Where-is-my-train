@@ -21,6 +21,7 @@ com/traintracker/api/service/PaymentService.class
 com/traintracker/api/TrainTrackerApplication.class
 com/traintracker/api/domain/TrainStop.class
 com/traintracker/api/domain/Station.class
+com/traintracker/api/web/PaymentWebhookController.class
 com/traintracker/api/repo/UserAccountRepository.class
 com/traintracker/api/domain/Seat.class
 com/traintracker/api/repo/BookingRepository.class
