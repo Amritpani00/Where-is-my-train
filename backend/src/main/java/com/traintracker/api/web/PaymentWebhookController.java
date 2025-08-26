@@ -5,6 +5,7 @@ import com.traintracker.api.domain.Payment;
 import com.traintracker.api.repo.BookingRepository;
 import com.traintracker.api.repo.PaymentRepository;
 import com.traintracker.api.service.EmailService;
+import com.traintracker.api.service.EventBus;
 import com.traintracker.api.service.PaymentService;
 import com.traintracker.api.service.PdfTicketService;
 import org.json.JSONObject;
@@ -23,13 +24,15 @@ public class PaymentWebhookController {
 	private final BookingRepository bookingRepository;
 	private final PdfTicketService pdfTicketService;
 	private final EmailService emailService;
+	private final EventBus eventBus;
 
-	public PaymentWebhookController(PaymentService paymentService, PaymentRepository paymentRepository, BookingRepository bookingRepository, PdfTicketService pdfTicketService, EmailService emailService) {
+	public PaymentWebhookController(PaymentService paymentService, PaymentRepository paymentRepository, BookingRepository bookingRepository, PdfTicketService pdfTicketService, EmailService emailService, EventBus eventBus) {
 		this.paymentService = paymentService;
 		this.paymentRepository = paymentRepository;
 		this.bookingRepository = bookingRepository;
 		this.pdfTicketService = pdfTicketService;
 		this.emailService = emailService;
+		this.eventBus = eventBus;
 	}
 
 	@PostMapping
@@ -54,9 +57,12 @@ public class PaymentWebhookController {
 			p.setStatus("SUCCESS");
 			paymentRepository.save(p);
 			Booking booking = bookingRepository.findById(p.getBooking().getId()).orElse(null);
-			if (booking != null && booking.getUser() != null && booking.getUser().getEmail() != null) {
-				byte[] pdf = pdfTicketService.generateTicketPdf(booking);
-				emailService.sendTicket(booking.getUser().getEmail(), "Your Ticket - PNR " + booking.getPnr(), "Attached is your ticket.", pdf, "ticket-" + booking.getPnr() + ".pdf");
+			if (booking != null) {
+				if (booking.getUser() != null && booking.getUser().getEmail() != null) {
+					byte[] pdf = pdfTicketService.generateTicketPdf(booking);
+					emailService.sendTicket(booking.getUser().getEmail(), "Your Ticket - PNR " + booking.getPnr(), "Attached is your ticket.", pdf, "ticket-" + booking.getPnr() + ".pdf");
+				}
+				eventBus.publish("payment.success", Map.of("bookingId", booking.getId(), "pnr", booking.getPnr()));
 			}
 		}
 		return ResponseEntity.ok(Map.of("ok", true));

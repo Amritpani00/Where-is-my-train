@@ -6,6 +6,7 @@ import com.traintracker.api.domain.Train;
 import com.traintracker.api.repo.BookingRepository;
 import com.traintracker.api.repo.StationRepository;
 import com.traintracker.api.repo.TrainRepository;
+import com.traintracker.api.service.EventBus;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -29,11 +30,13 @@ public class BookingController {
 	private final BookingRepository bookingRepository;
 	private final TrainRepository trainRepository;
 	private final StationRepository stationRepository;
+	private final EventBus eventBus;
 
-	public BookingController(BookingRepository bookingRepository, TrainRepository trainRepository, StationRepository stationRepository) {
+	public BookingController(BookingRepository bookingRepository, TrainRepository trainRepository, StationRepository stationRepository, EventBus eventBus) {
 		this.bookingRepository = bookingRepository;
 		this.trainRepository = trainRepository;
 		this.stationRepository = stationRepository;
+		this.eventBus = eventBus;
 	}
 
 	@PostMapping
@@ -63,6 +66,7 @@ public class BookingController {
 				.createdAt(OffsetDateTime.now())
 				.build();
 		bookingRepository.save(booking);
+		eventBus.publish("booking.created", Map.of("bookingId", booking.getId(), "pnr", booking.getPnr()));
 		return ResponseEntity.ok(Map.of(
 				"bookingId", booking.getId(),
 				"pnr", booking.getPnr(),

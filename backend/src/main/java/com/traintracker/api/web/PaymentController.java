@@ -4,6 +4,7 @@ import com.razorpay.Order;
 import com.traintracker.api.domain.Booking;
 import com.traintracker.api.repo.BookingRepository;
 import com.traintracker.api.service.EmailService;
+import com.traintracker.api.service.EventBus;
 import com.traintracker.api.service.PaymentService;
 import com.traintracker.api.service.PdfTicketService;
 import jakarta.validation.constraints.NotBlank;
@@ -23,12 +24,14 @@ public class PaymentController {
 	private final BookingRepository bookingRepository;
 	private final PdfTicketService pdfTicketService;
 	private final EmailService emailService;
+	private final EventBus eventBus;
 
-	public PaymentController(PaymentService paymentService, BookingRepository bookingRepository, PdfTicketService pdfTicketService, EmailService emailService) {
+	public PaymentController(PaymentService paymentService, BookingRepository bookingRepository, PdfTicketService pdfTicketService, EmailService emailService, EventBus eventBus) {
 		this.paymentService = paymentService;
 		this.bookingRepository = bookingRepository;
 		this.pdfTicketService = pdfTicketService;
 		this.emailService = emailService;
+		this.eventBus = eventBus;
 	}
 
 	@PostMapping("/create-order/{bookingId}")
@@ -61,6 +64,7 @@ public class PaymentController {
 			byte[] pdf = pdfTicketService.generateTicketPdf(booking);
 			emailService.sendTicket(recipient, "Your Ticket - PNR " + booking.getPnr(), "Attached is your ticket.", pdf, "ticket-" + booking.getPnr() + ".pdf");
 		}
+		eventBus.publish("payment.success", Map.of("bookingId", booking.getId(), "pnr", booking.getPnr()));
 		return ResponseEntity.ok(Map.of("ok", true));
 	}
 
