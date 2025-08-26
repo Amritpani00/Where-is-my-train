@@ -1,4 +1,5 @@
 /workspace/backend/src/main/java/com/traintracker/api/TrainTrackerApplication.java
+/workspace/backend/src/main/java/com/traintracker/api/config/RazorpayConfig.java
 /workspace/backend/src/main/java/com/traintracker/api/domain/BookedSeat.java
 /workspace/backend/src/main/java/com/traintracker/api/domain/Booking.java
 /workspace/backend/src/main/java/com/traintracker/api/domain/Coach.java
@@ -19,4 +20,8 @@
 /workspace/backend/src/main/java/com/traintracker/api/repo/TrainRepository.java
 /workspace/backend/src/main/java/com/traintracker/api/repo/TrainStopRepository.java
 /workspace/backend/src/main/java/com/traintracker/api/repo/UserAccountRepository.java
+/workspace/backend/src/main/java/com/traintracker/api/service/EmailService.java
+/workspace/backend/src/main/java/com/traintracker/api/service/PaymentService.java
+/workspace/backend/src/main/java/com/traintracker/api/service/PdfTicketService.java
+/workspace/backend/src/main/java/com/traintracker/api/web/PaymentController.java
 /workspace/backend/src/main/java/com/traintracker/api/web/PingController.java

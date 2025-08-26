@@ -1,8 +1,10 @@
 com/traintracker/api/domain/BookedSeat$BookedSeatBuilder.class
 com/traintracker/api/domain/Role$RoleBuilder.class
+com/traintracker/api/web/PaymentController.class
 com/traintracker/api/repo/SeatRepository.class
 com/traintracker/api/domain/Role.class
 com/traintracker/api/domain/Coach$CoachBuilder.class
+com/traintracker/api/service/EmailService.class
 com/traintracker/api/repo/CoachRepository.class
 com/traintracker/api/web/PingController.class
 com/traintracker/api/repo/PaymentRepository.class
@@ -14,6 +16,8 @@ com/traintracker/api/repo/StationRepository.class
 com/traintracker/api/domain/Coach.class
 com/traintracker/api/domain/UserAccount.class
 com/traintracker/api/repo/TrainStopRepository.class
+com/traintracker/api/config/RazorpayConfig.class
+com/traintracker/api/service/PaymentService.class
 com/traintracker/api/TrainTrackerApplication.class
 com/traintracker/api/domain/TrainStop.class
 com/traintracker/api/domain/Station.class
@@ -26,6 +30,7 @@ com/traintracker/api/domain/TrainStop$TrainStopBuilder.class
 com/traintracker/api/domain/Train.class
 com/traintracker/api/domain/Payment.class
 com/traintracker/api/repo/BookedSeatRepository.class
+com/traintracker/api/service/PdfTicketService.class
 com/traintracker/api/domain/Station$StationBuilder.class
 com/traintracker/api/domain/Seat$SeatBuilder.class
 com/traintracker/api/domain/Booking.class
