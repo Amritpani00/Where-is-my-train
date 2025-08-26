@@ -7,6 +7,7 @@ com/traintracker/api/web/BookingController$CreateBookingRequest.class
 com/traintracker/api/domain/Coach$CoachBuilder.class
 com/traintracker/api/service/EmailService.class
 com/traintracker/api/repo/CoachRepository.class
+com/traintracker/api/web/BookingController$BookingSummary.class
 com/traintracker/api/web/PingController.class
 com/traintracker/api/repo/PaymentRepository.class
 com/traintracker/api/domain/UserAccount$UserAccountBuilder.class

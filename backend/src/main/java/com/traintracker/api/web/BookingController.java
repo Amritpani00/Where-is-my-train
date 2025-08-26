@@ -9,6 +9,8 @@ import com.traintracker.api.repo.TrainRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -67,6 +70,34 @@ public class BookingController {
 		));
 	}
 
+	@GetMapping("/{id}")
+	public ResponseEntity<BookingSummary> getById(@PathVariable Long id) {
+		Booking b = bookingRepository.findById(id).orElseThrow();
+		return ResponseEntity.ok(toSummary(b));
+	}
+
+	@GetMapping
+	public ResponseEntity<List<BookingSummary>> listRecent(@RequestParam(name = "limit", defaultValue = "20") int limit) {
+		if (limit < 1) limit = 1;
+		if (limit > 100) limit = 100;
+		List<Booking> list = bookingRepository.findAll(PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "createdAt"))).getContent();
+		return ResponseEntity.ok(list.stream().map(this::toSummary).toList());
+	}
+
+	private BookingSummary toSummary(Booking b) {
+		return new BookingSummary(
+				b.getId(),
+				b.getPnr(),
+				b.getTrain() != null ? b.getTrain().getNumber() : null,
+				b.getFromStation() != null ? b.getFromStation().getCode() : null,
+				b.getToStation() != null ? b.getToStation().getCode() : null,
+				b.getTravelDate(),
+				b.getStatus(),
+				b.getTotalAmount(),
+				b.getCreatedAt()
+		);
+	}
+
 	private static String generatePnr() {
 		Random r = new Random();
 		StringBuilder sb = new StringBuilder();
@@ -81,5 +112,17 @@ public class BookingController {
 			@NotBlank String toCode,
 			@NotBlank String travelDate,
 			@NotNull String amount
+	) {}
+
+	public record BookingSummary(
+			Long id,
+			String pnr,
+			String trainNumber,
+			String fromCode,
+			String toCode,
+			LocalDate travelDate,
+			String status,
+			BigDecimal amount,
+			OffsetDateTime createdAt
 	) {}
 }
