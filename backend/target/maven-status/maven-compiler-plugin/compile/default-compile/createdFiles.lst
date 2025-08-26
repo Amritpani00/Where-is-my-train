@@ -35,3 +35,4 @@ com/traintracker/api/domain/Station$StationBuilder.class
 com/traintracker/api/domain/Seat$SeatBuilder.class
 com/traintracker/api/domain/Booking.class
 com/traintracker/api/repo/TrainRepository.class
+com/traintracker/api/web/EmailController.class
