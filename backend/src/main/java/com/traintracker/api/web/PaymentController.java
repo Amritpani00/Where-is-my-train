@@ -52,10 +52,14 @@ public class PaymentController {
 	) {
 		boolean ok = paymentService.verifyAndCapture(razorpay_order_id, razorpay_payment_id, razorpay_signature);
 		if (!ok) return ResponseEntity.badRequest().body(Map.of("ok", false));
-		if (email != null && !email.isBlank()) {
-			Booking booking = bookingRepository.findById(bookingId).orElseThrow();
+
+		Booking booking = bookingRepository.findById(bookingId).orElseThrow();
+		String recipient = (email != null && !email.isBlank())
+				? email
+				: (booking.getUser() != null ? booking.getUser().getEmail() : null);
+		if (recipient != null && !recipient.isBlank()) {
 			byte[] pdf = pdfTicketService.generateTicketPdf(booking);
-			emailService.sendTicket(email, "Your Ticket - PNR " + booking.getPnr(), "Attached is your ticket.", pdf, "ticket-" + booking.getPnr() + ".pdf");
+			emailService.sendTicket(recipient, "Your Ticket - PNR " + booking.getPnr(), "Attached is your ticket.", pdf, "ticket-" + booking.getPnr() + ".pdf");
 		}
 		return ResponseEntity.ok(Map.of("ok", true));
 	}
