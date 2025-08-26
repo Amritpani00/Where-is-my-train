@@ -1,3 +1,4 @@
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -8,29 +9,422 @@
 
  :: Spring Boot ::                (v3.3.4)
 
-2025-08-26T06:54:49.644Z  INFO 4575 --- [train-tracker] [           main] c.t.api.TrainTrackerApplication          : Starting TrainTrackerApplication v0.0.1-SNAPSHOT using Java 21.0.7 with PID 4575 (/workspace/backend/target/backend-0.0.1-SNAPSHOT.jar started by ubuntu in /workspace/backend)
-2025-08-26T06:54:49.646Z  INFO 4575 --- [train-tracker] [           main] c.t.api.TrainTrackerApplication          : The following 1 profile is active: "dev"
-2025-08-26T06:54:50.338Z  INFO 4575 --- [train-tracker] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-08-26T06:54:50.351Z  INFO 4575 --- [train-tracker] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 0 JPA repository interfaces.
-2025-08-26T06:54:50.785Z  INFO 4575 --- [train-tracker] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
-2025-08-26T06:54:50.794Z  INFO 4575 --- [train-tracker] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2025-08-26T06:54:50.794Z  INFO 4575 --- [train-tracker] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
-2025-08-26T06:54:50.812Z  INFO 4575 --- [train-tracker] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2025-08-26T06:54:50.813Z  INFO 4575 --- [train-tracker] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1122 ms
-2025-08-26T06:54:50.889Z  INFO 4575 --- [train-tracker] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-08-26T06:54:51.056Z  INFO 4575 --- [train-tracker] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:traindb user=SA
-2025-08-26T06:54:51.057Z  INFO 4575 --- [train-tracker] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-08-26T06:54:51.065Z  INFO 4575 --- [train-tracker] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:traindb'
-2025-08-26T06:54:51.178Z  INFO 4575 --- [train-tracker] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-08-26T06:54:51.210Z  INFO 4575 --- [train-tracker] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2025-08-26T06:54:51.233Z  INFO 4575 --- [train-tracker] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-08-26T06:54:51.405Z  INFO 4575 --- [train-tracker] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-08-26T06:54:51.633Z  INFO 4575 --- [train-tracker] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-08-26T06:54:51.636Z  INFO 4575 --- [train-tracker] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-08-26T06:54:51.684Z  WARN 4575 --- [train-tracker] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-08-26T06:54:52.091Z  INFO 4575 --- [train-tracker] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
-2025-08-26T06:54:52.137Z  INFO 4575 --- [train-tracker] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
-2025-08-26T06:54:52.147Z  INFO 4575 --- [train-tracker] [           main] c.t.api.TrainTrackerApplication          : Started TrainTrackerApplication in 2.765 seconds (process running for 3.054)
-2025-08-26T06:54:53.161Z  INFO 4575 --- [train-tracker] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-08-26T06:54:53.161Z  INFO 4575 --- [train-tracker] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2025-08-26T06:54:53.162Z  INFO 4575 --- [train-tracker] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-08-26T11:37:04.567Z  INFO 21532 --- [train-tracker] [           main] c.t.api.TrainTrackerApplication          : Starting TrainTrackerApplication v0.0.1-SNAPSHOT using Java 21.0.7 with PID 21532 (/workspace/backend/target/backend-0.0.1-SNAPSHOT.jar started by ubuntu in /workspace/backend)
+2025-08-26T11:37:04.569Z  INFO 21532 --- [train-tracker] [           main] c.t.api.TrainTrackerApplication          : The following 1 profile is active: "dev"
+2025-08-26T11:37:05.523Z  INFO 21532 --- [train-tracker] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-26T11:37:05.586Z  INFO 21532 --- [train-tracker] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 10 JPA repository interfaces.
+2025-08-26T11:37:06.279Z  INFO 21532 --- [train-tracker] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-08-26T11:37:06.290Z  INFO 21532 --- [train-tracker] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-08-26T11:37:06.290Z  INFO 21532 --- [train-tracker] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-08-26T11:37:06.312Z  INFO 21532 --- [train-tracker] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-08-26T11:37:06.312Z  INFO 21532 --- [train-tracker] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1706 ms
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
+2025-08-26T11:37:06.420Z  INFO 21532 --- [train-tracker] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-08-26T11:37:06.622Z  INFO 21532 --- [train-tracker] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:traindb user=SA
+2025-08-26T11:37:06.622Z  INFO 21532 --- [train-tracker] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-08-26T11:37:06.629Z  INFO 21532 --- [train-tracker] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:traindb'
+2025-08-26T11:37:06.766Z  INFO 21532 --- [train-tracker] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-26T11:37:06.800Z  INFO 21532 --- [train-tracker] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-08-26T11:37:06.833Z  INFO 21532 --- [train-tracker] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-08-26T11:37:07.003Z  INFO 21532 --- [train-tracker] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-26T11:37:07.831Z  INFO 21532 --- [train-tracker] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: 
+    create table booked_seats (
+        id bigint generated by default as identity,
+        passenger_age integer not null,
+        passenger_gender varchar(10) not null,
+        passenger_name varchar(100) not null,
+        booking_id bigint not null,
+        seat_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table bookings (
+        id bigint generated by default as identity,
+        created_at timestamp(6) with time zone not null,
+        pnr varchar(12) not null,
+        status varchar(20) not null,
+        total_amount numeric(10,2) not null,
+        travel_date date not null,
+        from_station_id bigint not null,
+        to_station_id bigint not null,
+        train_id bigint not null,
+        user_id bigint,
+        primary key (id)
+    )
+Hibernate: 
+    create table coaches (
+        id bigint generated by default as identity,
+        coach_index integer not null,
+        coach_type varchar(10) not null,
+        train_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table payments (
+        id bigint generated by default as identity,
+        amount numeric(10,2) not null,
+        created_at timestamp(6) with time zone not null,
+        currency varchar(10) not null,
+        provider_order_id varchar(40),
+        provider_payment_id varchar(40),
+        provider_signature varchar(100),
+        status varchar(20) not null,
+        booking_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table roles (
+        id bigint generated by default as identity,
+        name varchar(50) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table seats (
+        id bigint generated by default as identity,
+        seat_number varchar(10) not null,
+        travel_class varchar(10) not null,
+        coach_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table stations (
+        id bigint generated by default as identity,
+        city varchar(100),
+        code varchar(10) not null,
+        name varchar(100) not null,
+        state varchar(100),
+        primary key (id)
+    )
+Hibernate: 
+    create table train_stops (
+        id bigint generated by default as identity,
+        arrival_time time(6),
+        day_offset integer not null,
+        departure_time time(6),
+        sequence_number integer not null,
+        station_id bigint not null,
+        train_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table trains (
+        id bigint generated by default as identity,
+        active boolean not null,
+        effective_from date,
+        name varchar(120) not null,
+        number varchar(10) not null,
+        primary key (id)
+    )
+Hibernate: 
+    create table user_roles (
+        user_id bigint not null,
+        role_id bigint not null,
+        primary key (user_id, role_id)
+    )
+Hibernate: 
+    create table users (
+        id bigint generated by default as identity,
+        email varchar(150) not null,
+        password_hash varchar(255) not null,
+        phone varchar(20) not null,
+        username varchar(100) not null,
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists bookings 
+       drop constraint if exists UKmumifbrfh11nq6204aubv6dyr
+Hibernate: 
+    alter table if exists bookings 
+       add constraint UKmumifbrfh11nq6204aubv6dyr unique (pnr)
+Hibernate: 
+    alter table if exists roles 
+       drop constraint if exists UKofx66keruapi6vyqpv6f2or37
+Hibernate: 
+    alter table if exists roles 
+       add constraint UKofx66keruapi6vyqpv6f2or37 unique (name)
+Hibernate: 
+    alter table if exists seats 
+       drop constraint if exists UKovdm5ns42a103vghmumb081fa
+Hibernate: 
+    alter table if exists seats 
+       add constraint UKovdm5ns42a103vghmumb081fa unique (coach_id, seat_number)
+Hibernate: 
+    alter table if exists stations 
+       drop constraint if exists UKa5jb873kqd0gpggavx5n5l2gd
+Hibernate: 
+    alter table if exists stations 
+       add constraint UKa5jb873kqd0gpggavx5n5l2gd unique (code)
+Hibernate: 
+    alter table if exists trains 
+       drop constraint if exists UKfl8n21arxdvb1hh98o4mn9csm
+Hibernate: 
+    alter table if exists trains 
+       add constraint UKfl8n21arxdvb1hh98o4mn9csm unique (number)
+Hibernate: 
+    alter table if exists users 
+       drop constraint if exists UK6dotkott2kjsp8vw4d0m25fb7
+Hibernate: 
+    alter table if exists users 
+       add constraint UK6dotkott2kjsp8vw4d0m25fb7 unique (email)
+Hibernate: 
+    alter table if exists users 
+       drop constraint if exists UKr43af9ap4edm43mmtq01oddj6
+Hibernate: 
+    alter table if exists users 
+       add constraint UKr43af9ap4edm43mmtq01oddj6 unique (username)
+Hibernate: 
+    alter table if exists booked_seats 
+       add constraint FK7meqd3jdhk6h5v55d7pyu1t00 
+       foreign key (booking_id) 
+       references bookings
+Hibernate: 
+    alter table if exists booked_seats 
+       add constraint FK7xvuqjbn2lo5pnn3mh6wymq3g 
+       foreign key (seat_id) 
+       references seats
+Hibernate: 
+    alter table if exists bookings 
+       add constraint FK9sb3nedr9axgf2vh79f2bnvbt 
+       foreign key (from_station_id) 
+       references stations
+Hibernate: 
+    alter table if exists bookings 
+       add constraint FKnlyumx0ambx0fr6fcw8fsx11 
+       foreign key (to_station_id) 
+       references stations
+Hibernate: 
+    alter table if exists bookings 
+       add constraint FKnvav969din6sdwdejvq0g5a7s 
+       foreign key (train_id) 
+       references trains
+Hibernate: 
+    alter table if exists bookings 
+       add constraint FKeyog2oic85xg7hsu2je2lx3s6 
+       foreign key (user_id) 
+       references users
+Hibernate: 
+    alter table if exists coaches 
+       add constraint FKn5ep63duidmu608a8dryi3vr1 
+       foreign key (train_id) 
+       references trains
+Hibernate: 
+    alter table if exists payments 
+       add constraint FKc52o2b1jkxttngufqp3t7jr3h 
+       foreign key (booking_id) 
+       references bookings
+Hibernate: 
+    alter table if exists seats 
+       add constraint FKbojr5ye39r8xyoolriorvf7jy 
+       foreign key (coach_id) 
+       references coaches
+Hibernate: 
+    alter table if exists train_stops 
+       add constraint FKougx6d7watbi87oxu44yee5d0 
+       foreign key (station_id) 
+       references stations
+Hibernate: 
+    alter table if exists train_stops 
+       add constraint FKk5v7drqvluhtv9porxh671cg3 
+       foreign key (train_id) 
+       references trains
+Hibernate: 
+    alter table if exists user_roles 
+       add constraint FKh8ciramu9cc9q3qcqiv4ue8a6 
+       foreign key (role_id) 
+       references roles
+Hibernate: 
+    alter table if exists user_roles 
+       add constraint FKhfh9dx7w3ubf1co1vdev94g3f 
+       foreign key (user_id) 
+       references users
+2025-08-26T11:37:07.899Z  INFO 21532 --- [train-tracker] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-26T11:37:08.417Z  WARN 21532 --- [train-tracker] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-26T11:37:08.455Z  WARN 21532 --- [train-tracker] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ec6e3c7c-1668-4f44-a1bf-0de66fbf140f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-08-26T11:37:08.468Z  INFO 21532 --- [train-tracker] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-08-26T11:37:08.757Z  INFO 21532 --- [train-tracker] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2025-08-26T11:37:09.122Z  INFO 21532 --- [train-tracker] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-08-26T11:37:09.133Z  INFO 21532 --- [train-tracker] [           main] c.t.api.TrainTrackerApplication          : Started TrainTrackerApplication in 4.91 seconds (process running for 5.434)
+2025-08-26T11:37:09.860Z  INFO 21532 --- [train-tracker] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-26T11:37:09.861Z  INFO 21532 --- [train-tracker] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-08-26T11:37:09.862Z  INFO 21532 --- [train-tracker] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.effective_from,
+        t1_0.name,
+        t1_0.number 
+    from
+        trains t1_0 
+    where
+        t1_0.number=?
+Hibernate: 
+    insert 
+    into
+        trains
+        (active, effective_from, name, number, id) 
+    values
+        (?, ?, ?, ?, default)
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.city,
+        s1_0.code,
+        s1_0.name,
+        s1_0.state 
+    from
+        stations s1_0 
+    where
+        s1_0.code=?
+Hibernate: 
+    insert 
+    into
+        stations
+        (city, code, name, state, id) 
+    values
+        (?, ?, ?, ?, default)
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.city,
+        s1_0.code,
+        s1_0.name,
+        s1_0.state 
+    from
+        stations s1_0 
+    where
+        s1_0.code=?
+Hibernate: 
+    insert 
+    into
+        stations
+        (city, code, name, state, id) 
+    values
+        (?, ?, ?, ?, default)
+Hibernate: 
+    insert 
+    into
+        bookings
+        (created_at, from_station_id, pnr, status, to_station_id, total_amount, train_id, travel_date, user_id, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.created_at,
+        b1_0.from_station_id,
+        b1_0.pnr,
+        b1_0.status,
+        b1_0.to_station_id,
+        b1_0.total_amount,
+        b1_0.train_id,
+        b1_0.travel_date,
+        b1_0.user_id 
+    from
+        bookings b1_0 
+    order by
+        b1_0.created_at desc 
+    offset
+        ? rows 
+    fetch
+        first ? rows only
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.effective_from,
+        t1_0.name,
+        t1_0.number 
+    from
+        trains t1_0 
+    where
+        t1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.city,
+        s1_0.code,
+        s1_0.name,
+        s1_0.state 
+    from
+        stations s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.city,
+        s1_0.code,
+        s1_0.name,
+        s1_0.state 
+    from
+        stations s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.created_at,
+        b1_0.from_station_id,
+        b1_0.pnr,
+        b1_0.status,
+        b1_0.to_station_id,
+        b1_0.total_amount,
+        b1_0.train_id,
+        b1_0.travel_date,
+        b1_0.user_id 
+    from
+        bookings b1_0 
+    where
+        b1_0.id=?
+Hibernate: 
+    select
+        t1_0.id,
+        t1_0.active,
+        t1_0.effective_from,
+        t1_0.name,
+        t1_0.number 
+    from
+        trains t1_0 
+    where
+        t1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.city,
+        s1_0.code,
+        s1_0.name,
+        s1_0.state 
+    from
+        stations s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        s1_0.id,
+        s1_0.city,
+        s1_0.code,
+        s1_0.name,
+        s1_0.state 
+    from
+        stations s1_0 
+    where
+        s1_0.id=?
+Hibernate: 
+    select
+        bs1_0.booking_id,
+        bs1_0.id,
+        bs1_0.passenger_age,
+        bs1_0.passenger_gender,
+        bs1_0.passenger_name,
+        bs1_0.seat_id 
+    from
+        booked_seats bs1_0 
+    where
+        bs1_0.booking_id=?

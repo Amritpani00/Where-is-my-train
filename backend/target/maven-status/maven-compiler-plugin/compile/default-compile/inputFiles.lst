@@ -1,5 +1,6 @@
 /workspace/backend/src/main/java/com/traintracker/api/TrainTrackerApplication.java
 /workspace/backend/src/main/java/com/traintracker/api/config/RazorpayConfig.java
+/workspace/backend/src/main/java/com/traintracker/api/config/SecurityConfig.java
 /workspace/backend/src/main/java/com/traintracker/api/domain/BookedSeat.java
 /workspace/backend/src/main/java/com/traintracker/api/domain/Booking.java
 /workspace/backend/src/main/java/com/traintracker/api/domain/Coach.java
