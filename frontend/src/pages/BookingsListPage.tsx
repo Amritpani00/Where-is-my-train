@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { apiGet } from '../api/client'
 
 type BookingSummary = {
 	id: number
@@ -15,13 +16,12 @@ type BookingSummary = {
 export default function BookingsListPage() {
 	const [items, setItems] = useState<BookingSummary[]>([])
 	const [status, setStatus] = useState('')
+	const [email, setEmail] = useState('')
 
 	useEffect(() => {
 		;(async () => {
 			try {
-				const res = await fetch('/api/bookings?limit=50')
-				if (!res.ok) throw new Error('Failed to load bookings')
-				const json = await res.json()
+				const json = await apiGet<BookingSummary[]>('/api/bookings?limit=50')
 				setItems(json)
 			} catch (e: any) {
 				setStatus('Error: ' + e.message)
@@ -29,9 +29,30 @@ export default function BookingsListPage() {
 		})()
 	}, [])
 
+	function download(b: BookingSummary) {
+		window.open(`/api/payments/ticket/${b.id}`, '_blank')
+	}
+
+	async function emailTicket(b: BookingSummary) {
+		if (!email) {
+			setStatus('Enter email in the field above')
+			return
+		}
+		try {
+			const res = await fetch(`/api/email/ticket/${b.id}?to=${encodeURIComponent(email)}`, { method: 'POST' })
+			if (!res.ok) throw new Error('Email failed')
+			setStatus('Email sent')
+		} catch (e: any) {
+			setStatus('Email error: ' + e.message)
+		}
+	}
+
 	return (
 		<div style={{ padding: 16 }}>
 			<h2>Recent Bookings</h2>
+			<div style={{ marginBottom: 8 }}>
+				<input placeholder="your@email" value={email} onChange={(e) => setEmail(e.target.value)} />
+			</div>
 			{status && <div>{status}</div>}
 			<table style={{ borderCollapse: 'collapse', width: '100%' }}>
 				<thead>
@@ -43,7 +64,7 @@ export default function BookingsListPage() {
 						<th align="left">To</th>
 						<th align="left">Date</th>
 						<th align="left">Amount</th>
-						<th align="left">Pay</th>
+						<th align="left">Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -57,7 +78,8 @@ export default function BookingsListPage() {
 							<td>{b.travelDate}</td>
 							<td>{b.amount}</td>
 							<td>
-								<a href="/pay">Pay</a>
+								<button onClick={() => download(b)}>PDF</button>
+								<button onClick={() => emailTicket(b)} style={{ marginLeft: 8 }}>Email</button>
 							</td>
 						</tr>
 					))}
